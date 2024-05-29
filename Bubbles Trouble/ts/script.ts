@@ -6,7 +6,7 @@ class Player {
 }
 class Point {
     id: string
-    constructor(public name: string, id?: string | null) {
+    constructor(public name: string, public level: string, id?: string | null) {
         this.id = `id-${new Date().getTime() - Math.random()}`
     }
 }
@@ -36,9 +36,8 @@ function handleName(ev: any) {
         ev.preventDefault();
         const name = ev.target.elements.name.value;
 
-        const newName = new Point(name);
+        const newName = new Point(name, "level1");
         points.push(newName);
-
 
         localStorage.setItem("points", JSON.stringify(points))
         ev.target.reset();

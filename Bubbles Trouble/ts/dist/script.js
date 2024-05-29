@@ -7,8 +7,9 @@ var Player = /** @class */ (function () {
     return Player;
 }());
 var Point = /** @class */ (function () {
-    function Point(name, id) {
+    function Point(name, level, id) {
         this.name = name;
+        this.level = level;
         this.id = "id-" + (new Date().getTime() - Math.random());
     }
     return Point;
@@ -19,7 +20,7 @@ var points = [];
 logIn();
 function logIn() {
     try {
-        var html = " <div class=\"log\"> <form onsubmit=\"handleAdd(event)\"><label for=\"worker-name\">enter your Name:</label> <br>\n        <input required type=\"text\" name=\"name\" value=\"\"> <br> <br> <button type=\"submit\">ok</button> </form> </div>";
+        var html = " <div class=\"log\"> <form onsubmit=\"handleName(event)\"><label for=\"worker-name\">enter your Name:</label> <br>\n        <input required type=\"text\" name=\"name\" value=\"\"> <br> <br> <button type=\"submit\">ok</button> </form> </div>";
         if (!root)
             throw new Error("no root element");
         root.innerHTML = html;
@@ -28,11 +29,11 @@ function logIn() {
         console.error(error);
     }
 }
-function handleAdd(ev) {
+function handleName(ev) {
     try {
         ev.preventDefault();
         var name = ev.target.elements.name.value;
-        var newName = new Point(name);
+        var newName = new Point(name, "level1");
         points.push(newName);
         localStorage.setItem("points", JSON.stringify(points));
         ev.target.reset();
@@ -50,8 +51,7 @@ function addHomer() {
     try {
         var selectedPlayer = new Player("../img/homer.png");
         players.push(selectedPlayer);
-        savePlayerToLocalStorage(players);
-        console.log(players);
+        savePlayerInLocalStorage(players);
         window.location.href = "view/levels.html";
     }
     catch (error) {
@@ -62,8 +62,7 @@ function addBart() {
     try {
         var selectedPlayer = new Player("../img/bart.png");
         players.push(selectedPlayer);
-        savePlayerToLocalStorage(players);
-        console.log(players);
+        savePlayerInLocalStorage(players);
         window.location.href = "view/levels.html";
     }
     catch (error) {
@@ -74,15 +73,14 @@ function addMaggie() {
     try {
         var selectedPlayer = new Player("../img/Maggie.png");
         players.push(selectedPlayer);
-        savePlayerToLocalStorage(players);
-        console.log(players);
+        savePlayerInLocalStorage(players);
         window.location.href = "view/levels.html";
     }
     catch (error) {
         console.error(error);
     }
 }
-function savePlayerToLocalStorage(players) {
+function savePlayerInLocalStorage(players) {
     try {
         localStorage.setItem('players', JSON.stringify(players));
     }

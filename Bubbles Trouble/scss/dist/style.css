@@ -10,21 +10,25 @@ body #container {
   border: 2px gray solid;
   background: url(//sugarcakes4u.co.il/wp-content/uploads/2018/03/%D7%A4%D7%A8%D7%A7%D7%98-%D7%9C%D7%91%D7%9F-1.jpg) no-repeat center center/cover;
 }
-body #container__smallBall1, body #container__smallBall2 {
+body #container__smallBall1 {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   position: absolute;
   background: red;
   display: none;
+  z-index: 2;
+  border: 1px black solid;
 }
 body #container__gameOver {
   font-size: 40px;
   color: yellow;
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: black;
+  z-index: 10;
 }
 body #container__gameOver a {
+  font-weight: bolder;
   text-decoration: none;
   padding: 10px;
   font-size: 30px;
@@ -97,6 +101,7 @@ body #container .level {
   margin: 10px;
   background: url(//brachot.net/images/category_images/school-28949_1280.png) no-repeat center center/cover;
   background-color: white;
+  border: 2px solid black;
 }
 body #container .notAvailable {
   background-color: gray;
@@ -124,6 +129,8 @@ body #container #root .log {
 }
 body .none {
   display: none;
+  top: 0;
+  left: 0;
 }
 
 @media only screen and (min-width: 900px) {
