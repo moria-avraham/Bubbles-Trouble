@@ -1,3 +1,6 @@
+"use strict";
+exports.__esModule = true;
+exports.m = void 0;
 var Player = /** @class */ (function () {
     // id: string
     function Player(playerImg, id) {
@@ -88,3 +91,7 @@ function savePlayerInLocalStorage(players) {
         console.error(error);
     }
 }
+function m() {
+    console.log("first");
+}
+exports.m = m;

@@ -5,7 +5,7 @@ var points = pointsStorage ? JSON.parse(pointsStorage) : [];
 function level2ToButton() {
     level2.classList.remove("notAvailable");
     level2.addEventListener('click', function () {
-        window.location.href = 'next-level.html';
+        window.location.href = 'level2.html';
     });
 }
 function level3ToButton() {

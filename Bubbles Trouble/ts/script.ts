@@ -96,3 +96,7 @@ function savePlayerInLocalStorage(players: Player[]) {
         console.error(error)
     }
 }
+export function m() {
+    console.log("first")
+}
+
