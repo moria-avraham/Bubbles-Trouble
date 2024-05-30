@@ -1,4 +1,5 @@
 var smallBall1 = document.querySelector('#container__smallBall1');
+var gameOver = document.querySelector('#container__gameOver');
 getPlayerFromLocalStorage();
 function getPlayerFromLocalStorage() {
     try {
@@ -203,10 +204,8 @@ function ballAndPlayerCollision() {
             else if (collisionCount === 3) {
                 gameEnded = true;
                 GameOver();
-                var gameOver = document.querySelector('#container__gameOver');
                 var html = " <h1>game over</h1>   \n                <a href=\"levels.html\">start over</a>";
                 gameOver.innerHTML = html;
-                // <i class="fa-solid fa-rotate-left" > </i>
             }
         }
     }
@@ -248,8 +247,8 @@ function ballAndShootCollision() {
                 smallBall1.style.display = 'block';
                 ball.style.width = '50px';
                 ball.style.height = '50px';
-                changeBallPosition();
                 ballShrunk = true;
+                changeBallPosition();
                 updateBallsPosition();
             }
             else {
@@ -287,7 +286,6 @@ function updateBallsPosition() {
                     ball.element.style.top = ball.smallBallY + "px";
                 }
             });
-            // קריאה חוזרת לפונקציה ליצירת אנימציה חלקה
             requestAnimationFrame(updateBallsPosition);
         }
     }
@@ -316,14 +314,15 @@ function collision3() {
 setInterval(shootBalls, 10);
 var ball1Exist = true;
 var ball2Exist = true;
+var endTheGame = false;
 function shootBalls() {
     try {
         var iscollision3 = collision3();
-        if (iscollision3) {
+        if (iscollision3 && ball1Exist) {
             smallBall1.style.display = 'none';
             ball1Exist = false;
         }
-        if (ballHidden && !ball1Exist) {
+        if (ballHidden && !ball1Exist && !endTheGame) {
             var pointsStorage = localStorage.getItem('points');
             var points = pointsStorage ? JSON.parse(pointsStorage) : [];
             if (points.length > 0) {
@@ -331,9 +330,9 @@ function shootBalls() {
             }
             localStorage.setItem('points', JSON.stringify(points));
             GameOver();
-            var gameOver = document.querySelector('#container__gameOver');
             var html = "<h1>good job</h1>  <a href=\"levels.html\">next level</a>";
             gameOver.innerHTML = html;
+            endTheGame = true;
         }
     }
     catch (error) {

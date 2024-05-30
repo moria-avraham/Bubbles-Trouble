@@ -1,5 +1,6 @@
 
 const smallBall1 = document.querySelector('#container__smallBall1') as HTMLElement;
+const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
 
 getPlayerFromLocalStorage()
 function getPlayerFromLocalStorage() {
@@ -15,7 +16,6 @@ function getPlayerFromLocalStorage() {
 
 }
 
-
 function renderPlayers(player) {
     try {
         const rootPlayer = document.querySelector('#container__player') as HTMLElement;
@@ -28,9 +28,6 @@ function renderPlayers(player) {
         console.error(error);
     }
 }
-
-
-
 
 const bart = document.querySelector(`.bart`) as HTMLElement;
 const shoot = document.querySelector(`#container__shoot`) as HTMLElement;
@@ -69,7 +66,6 @@ function handleKeyDown(event) {
 
 function handleKeyUp(event) {
     try {
-
         if (event.key === ' ') {
             shoot.classList.remove('show');
         }
@@ -170,7 +166,6 @@ function collisions() {
             playerLocation.bottom > ballLocation.top &&
             playerLocation.top < ballLocation.bottom
         ) {
-
             return true;
         } else {
             return false
@@ -194,7 +189,6 @@ function GameOver() {
 
 function changeBallPosition() {
     try {
-
         const containerRect = container.getBoundingClientRect();
         const ballRect = ball.getBoundingClientRect();
 
@@ -208,8 +202,6 @@ function changeBallPosition() {
         console.error(error);
     }
 }
-
-
 
 function ballAndPlayerCollision() {
     try {
@@ -237,12 +229,9 @@ function ballAndPlayerCollision() {
             } else if (collisionCount === 3) {
                 gameEnded = true;
                 GameOver()
-                const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
                 const html = ` <h1>game over</h1>   
                 <a href="levels.html">start over</a>`
                 gameOver.innerHTML = html;
-                // <i class="fa-solid fa-rotate-left" > </i>
-
             }
         }
     } catch (error) {
@@ -284,15 +273,13 @@ function collision2() {
 function ballAndShootCollision() {
     try {
         const iscollision = collision2()
-
         if (iscollision) {
-
             if (!ballShrunk) {
                 smallBall1.style.display = 'block';
                 ball.style.width = '50px';
                 ball.style.height = '50px';
-                changeBallPosition()
                 ballShrunk = true;
+                changeBallPosition()
                 updateBallsPosition()
             } else {
                 ball.style.display = 'none';
@@ -304,13 +291,6 @@ function ballAndShootCollision() {
     }
 }
 
-interface Ball {
-    element: HTMLElement | null;
-    smallBallX: number;
-    smallBallY: number;
-    smallBallSpeedX: number;
-    smallBallSpeedY: number;
-}
 const balls = [
     { element: document.getElementById('ball'), smallBallX: 0, smallBallY: 0, smallBallSpeedX: 3.5, smallBallSpeedY: 3.5 },
     { element: document.getElementById('container__smallBall1'), smallBallX: 0, smallBallY: 0, smallBallSpeedX: 3.5, smallBallSpeedY: 3.5 }
@@ -319,7 +299,6 @@ const balls = [
 function updateBallsPosition() {
     try {
         if (canMoveBall) {
-
             const containerRect = container.getBoundingClientRect();
             balls.forEach(ball => {
                 if (ball.element) {
@@ -335,22 +314,18 @@ function updateBallsPosition() {
                     if (ball.smallBallY + ballRect.height > containerRect.height || ball.smallBallY < 0) {
                         ball.smallBallSpeedY = -ball.smallBallSpeedY; // שינוי כיוון התנועה בציר ה-y
                     }
-
                     // יישום המיקום החדש
                     ball.element.style.left = `${ball.smallBallX}px`;
                     ball.element.style.top = `${ball.smallBallY}px`;
                 }
             });
 
-            // קריאה חוזרת לפונקציה ליצירת אנימציה חלקה
             requestAnimationFrame(updateBallsPosition);
         }
-
     } catch (error) {
         console.error(error)
     }
 }
-
 
 function collision3() {
     try {
@@ -376,31 +351,27 @@ function collision3() {
 setInterval(shootBalls, 10);
 let ball1Exist = true;
 let ball2Exist = true;
-
+let endTheGame = false;
 function shootBalls() {
     try {
         const iscollision3 = collision3()
-        if (iscollision3) {
+        if (iscollision3 && ball1Exist) {
             smallBall1.style.display = 'none';
             ball1Exist = false;
         }
 
-        if (ballHidden && !ball1Exist) {
-
+        if (ballHidden && !ball1Exist && !endTheGame) {
             const pointsStorage = localStorage.getItem('points');
             let points = pointsStorage ? JSON.parse(pointsStorage) : [];
             if (points.length > 0) {
                 points[0].level = 'level2';
             }
             localStorage.setItem('points', JSON.stringify(points));
-
             GameOver()
-            const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
             const html = `<h1>good job</h1>  <a href="levels.html">next level</a>`
-
             gameOver.innerHTML = html;
+            endTheGame = true;
         }
-
     } catch (error) {
         console.error(error);
     }
