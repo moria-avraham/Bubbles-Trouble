@@ -52,7 +52,7 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
 document.addEventListener('keydown', handleKeyDown);
 document.addEventListener('keyup', handleKeyUp);
 
-function handleKeyDown(event) {
+function handleKeyDown(event: KeyboardEvent) {
     try {
         if (event.key === ' ') {
             shoot.classList.add('show');
@@ -62,7 +62,7 @@ function handleKeyDown(event) {
     }
 }
 
-function handleKeyUp(event) {
+function handleKeyUp(event: KeyboardEvent) {
     try {
         if (event.key === ' ') {
             shoot.classList.remove('show');

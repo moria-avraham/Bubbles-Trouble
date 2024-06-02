@@ -1,7 +1,7 @@
 "use strict";
-exports.__esModule = true;
 // import { getPlayerFromLocalStorage, moveBall } from './functions';
-var functions_1 = require("./functions");
+// import { m, moveBall } from './functions';
+exports.__esModule = true;
 // getPlayerFromLocalStorage()
-functions_1.moveBall();
+var functions_1 = require("./functions");
 functions_1.m();

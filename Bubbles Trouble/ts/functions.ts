@@ -59,8 +59,6 @@ export function moveBall() {
         console.error(error);
     }
 }
-
-
 export function m() {
-    console.log("first")
+    console.log("first");
 }
