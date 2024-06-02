@@ -1,4 +1,7 @@
 "use strict";
 exports.__esModule = true;
-var script_1 = require("./script");
-script_1.m();
+// import { getPlayerFromLocalStorage, moveBall } from './functions';
+var functions_1 = require("./functions");
+// getPlayerFromLocalStorage()
+functions_1.moveBall();
+functions_1.m();

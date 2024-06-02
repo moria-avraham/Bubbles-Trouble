@@ -14,35 +14,35 @@ function getPlayerFromLocalStorage() {
         return [];
     }
 }
-function renderPlayers(player) {
+function renderPlayers(selectedPlayer) {
     try {
         var rootPlayer = document.querySelector('#container__player');
-        var html = "<img class=\"bart\" src=\"" + player.playerImg + "\"> ";
+        var html = "<img class=\"selectedPlayer bart\" src=\"" + selectedPlayer.playerImg + "\"> ";
         rootPlayer.innerHTML = html;
         var life_1 = document.querySelector('#container__life');
-        var img = "<img id=\"image1\" class=\"Photos\" src=\"" + player.playerImg + "\"> <img id=\"image2\" class=\"Photos\" src=\"" + player.playerImg + "\"> <img id=\"image3\" class=\"Photos\" src=\"" + player.playerImg + "\">";
+        var img = "<img id=\"image1\" class=\"Photos\" src=\"" + selectedPlayer.playerImg + "\"> <img id=\"image2\" class=\"Photos\" src=\"" + selectedPlayer.playerImg + "\"> <img id=\"image3\" class=\"Photos\" src=\"" + selectedPlayer.playerImg + "\">";
         life_1.innerHTML = img;
     }
     catch (error) {
         console.error(error);
     }
 }
-var bart = document.querySelector(".bart");
+var player = document.querySelector(".selectedPlayer");
 var shoot = document.querySelector("#container__shoot");
 var container = document.querySelector('#container');
 document.addEventListener('keydown', function (event) {
     event.stopPropagation();
-    var bartRect = bart.getBoundingClientRect();
+    var playerRect = player.getBoundingClientRect();
     var containerRect = container.getBoundingClientRect();
     switch (event.key) {
         case 'ArrowLeft':
-            if (bartRect.left > containerRect.left) {
-                bart.style.left = bart.offsetLeft - 25 + "px";
+            if (playerRect.left > containerRect.left) {
+                player.style.left = player.offsetLeft - 25 + "px";
             }
             break;
         case 'ArrowRight':
-            if (bartRect.right < containerRect.right) {
-                bart.style.left = bart.offsetLeft + 25 + "px";
+            if (playerRect.right < containerRect.right) {
+                player.style.left = player.offsetLeft + 25 + "px";
             }
             break;
     }
@@ -71,7 +71,7 @@ function handleKeyUp(event) {
 }
 function updateTargetPosition() {
     try {
-        var sourceRect = bart.getBoundingClientRect();
+        var sourceRect = player.getBoundingClientRect();
         var targetRect = shoot.getBoundingClientRect();
         var offsetX = sourceRect.left - targetRect.left;
         var offsetY = sourceRect.top - targetRect.top;
@@ -117,9 +117,9 @@ function moveBall() {
     }
 }
 moveBall();
-function collision() {
+function checkPlayerBallCollision() {
     try {
-        var playerLocation = bart.getBoundingClientRect();
+        var playerLocation = player.getBoundingClientRect();
         var ballLocation = ball.getBoundingClientRect();
         if (playerLocation.right > ballLocation.left &&
             playerLocation.left < ballLocation.right &&
@@ -135,9 +135,9 @@ function collision() {
         console.error(error);
     }
 }
-function collisions() {
+function checkPlayerSmallBallCollision() {
     try {
-        var playerLocation = bart.getBoundingClientRect();
+        var playerLocation = player.getBoundingClientRect();
         var ballLocation = smallBall1.getBoundingClientRect();
         if (playerLocation.right > ballLocation.left &&
             playerLocation.left < ballLocation.right &&
@@ -153,10 +153,10 @@ function collisions() {
         console.error(error);
     }
 }
-function GameOver() {
+function GameEnd() {
     try {
         life.classList.add("none");
-        bart.classList.add("none");
+        player.classList.add("none");
         shoot.classList.add("none");
         ball.classList.add("none");
         smallBall1.classList.add("none");
@@ -184,8 +184,8 @@ function ballAndPlayerCollision() {
             gameEnded = true;
             return;
         }
-        var iscollision = collision();
-        var collisionsmallBal = collisions();
+        var iscollision = checkPlayerBallCollision();
+        var collisionsmallBal = checkPlayerSmallBallCollision();
         if (iscollision || collisionsmallBal) {
             var imageToRemove = images[collisionCount];
             if (imageToRemove) {
@@ -203,7 +203,7 @@ function ballAndPlayerCollision() {
             }
             else if (collisionCount === 3) {
                 gameEnded = true;
-                GameOver();
+                GameEnd();
                 var html = " <h1>game over</h1>   \n                <a href=\"levels.html\">start over</a>";
                 gameOver.innerHTML = html;
             }
@@ -221,7 +221,7 @@ setInterval(function () {
 setInterval(ballAndShootCollision, 10);
 var ballShrunk = false;
 var ballHidden = false;
-function collision2() {
+function checkShootBallCollision() {
     try {
         var ropeLocation = shoot.getBoundingClientRect();
         var ballLocation = ball.getBoundingClientRect();
@@ -241,7 +241,7 @@ function collision2() {
 }
 function ballAndShootCollision() {
     try {
-        var iscollision = collision2();
+        var iscollision = checkShootBallCollision();
         if (iscollision) {
             if (!ballShrunk) {
                 smallBall1.style.display = 'block';
@@ -293,7 +293,7 @@ function updateBallsPosition() {
         console.error(error);
     }
 }
-function collision3() {
+function checkShootSmallBallCollision() {
     try {
         var ropeLocation = shoot.getBoundingClientRect();
         var smallBall1Location = smallBall1.getBoundingClientRect();
@@ -317,7 +317,7 @@ var ball2Exist = true;
 var endTheGame = false;
 function shootBalls() {
     try {
-        var iscollision3 = collision3();
+        var iscollision3 = checkShootSmallBallCollision();
         if (iscollision3 && ball1Exist) {
             smallBall1.style.display = 'none';
             ball1Exist = false;
@@ -329,7 +329,7 @@ function shootBalls() {
                 points[0].level = 'level2';
             }
             localStorage.setItem('points', JSON.stringify(points));
-            GameOver();
+            GameEnd();
             var html = "<h1>good job</h1>  <a href=\"levels.html\">next level</a>";
             gameOver.innerHTML = html;
             endTheGame = true;
