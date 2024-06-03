@@ -1,7 +1,7 @@
 var level2 = document.querySelector('.level2');
 var level3 = document.querySelector('.level3');
 var pointsStorage = localStorage.getItem('points');
-var points = pointsStorage ? JSON.parse(pointsStorage) : [];
+var thePoints = pointsStorage ? JSON.parse(pointsStorage) : [];
 function level2ToButton() {
     level2.classList.remove("notAvailable");
     level2.addEventListener('click', function () {
@@ -17,11 +17,11 @@ function level3ToButton() {
 whatLevel();
 function whatLevel() {
     try {
-        if (points.length > 0) {
-            if (points[0].level === 'level2') {
+        if (thePoints.length > 0) {
+            if (thePoints[0].level === 'level2') {
                 level2ToButton();
             }
-            else if (points[0].level === 'level3') {
+            else if (thePoints[0].level === 'level3') {
                 level2ToButton();
                 level3ToButton();
             }

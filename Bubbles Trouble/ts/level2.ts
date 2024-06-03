@@ -3,6 +3,7 @@
 
 // getPlayerFromLocalStorage()
 
-import { m } from "./functions";
+import { moveBall } from './functions';
 
-m();
+
+moveBall();

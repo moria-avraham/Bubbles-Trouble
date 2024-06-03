@@ -227,7 +227,7 @@ function ballAndPlayerCollision() {
             } else if (collisionCount === 3) {
                 gameEnded = true;
                 GameEnd()
-                const html = ` <h1>game over</h1>   
+                const html = ` <h1>Game Over</h1>   
                 <a href="levels.html">start over</a>`
                 gameOver.innerHTML = html;
             }
@@ -366,7 +366,7 @@ function shootBalls() {
             }
             localStorage.setItem('points', JSON.stringify(points));
             GameEnd()
-            const html = `<h1>good job</h1>  <a href="levels.html">next level</a>`
+            const html = `<h1>Good Job</h1>  <a href="levels.html">next level</a>`
             gameOver.innerHTML = html;
             endTheGame = true;
         }

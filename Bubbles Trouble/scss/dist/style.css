@@ -90,7 +90,6 @@ body #container h2 {
   left: 600px;
 }
 body #container .level {
-  background-color: red;
   height: 90px;
   width: 90px;
   display: flex;
@@ -100,11 +99,13 @@ body #container .level {
   font-size: 20px;
   margin: 10px;
   background: url(//brachot.net/images/category_images/school-28949_1280.png) no-repeat center center/cover;
-  background-color: white;
-  border: 2px solid black;
+  color: yellow;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 body #container .notAvailable {
   background-color: gray;
+  color: #35350e;
 }
 body #container .player {
   padding: 10px 10px;
@@ -166,22 +167,52 @@ body .none {
     }
   }
 }
-@media only screen and (max-width: 900px) {
+@media (min-width: 600px) and (max-width: 900px) {
+  body {
+    overflow: hidden;
+  }
+  body #container {
+    height: 600px;
+    width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  body #container .log {
+    display: none;
+  }
+  body #container .bart {
+    height: 80px;
+    width: 80px;
+    top: 520px;
+    left: 200px;
+  }
+  @keyframes rope {
+    25% {
+      top: 350px;
+    }
+    50% {
+      top: 250px;
+    }
+    75% {
+      top: 150px;
+    }
+    100% {
+      top: -10px;
+    }
+  }
+}
+@media (min-width: 400px) and (max-width: 600px) {
   body {
     overflow: hidden;
   }
 
   #container {
     height: 600px;
-    width: 700px;
-    display: grid;
+    width: 520px;
+    display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .player {
-    height: 850px;
-    width: 850px;
   }
 
   .log {
@@ -189,64 +220,24 @@ body .none {
   }
 
   .bart {
-    top: 100px;
+    height: 80px;
+    width: 80px;
+    top: 520px;
     left: 200px;
   }
 
   @keyframes rope {
     25% {
-      left: 350px;
+      top: 350px;
     }
     50% {
-      left: 250px;
+      top: 250px;
     }
     75% {
-      left: 150px;
+      top: 150px;
     }
     100% {
-      left: -10px;
-    }
-  }
-}
-@media only screen and (max-width: 600px) {
-  body {
-    overflow: hidden;
-  }
-
-  #container {
-    height: 550px;
-    width: 550px;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .player {
-    height: 850px;
-    width: 850px;
-  }
-
-  .log {
-    display: none;
-  }
-
-  .bart {
-    top: 100px;
-    left: 200px;
-  }
-
-  @keyframes rope {
-    25% {
-      left: 350px;
-    }
-    50% {
-      left: 250px;
-    }
-    75% {
-      left: 150px;
-    }
-    100% {
-      left: -10px;
+      top: -10px;
     }
   }
 }
@@ -258,14 +249,9 @@ body .none {
   #container {
     height: 600px;
     width: 400px;
-    display: grid;
+    display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .player {
-    height: 850px;
-    width: 850px;
   }
 
   .log {
@@ -273,22 +259,24 @@ body .none {
   }
 
   .bart {
-    top: 100px;
+    height: 80px;
+    width: 80px;
+    top: 520px;
     left: 200px;
   }
 
   @keyframes rope {
     25% {
-      left: 350px;
+      top: 350px;
     }
     50% {
-      left: 250px;
+      top: 250px;
     }
     75% {
-      left: 150px;
+      top: 150px;
     }
     100% {
-      left: -10px;
+      top: -10px;
     }
   }
 }

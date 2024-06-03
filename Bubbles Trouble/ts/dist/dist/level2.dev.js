@@ -5,4 +5,4 @@ exports.__esModule = true; // getPlayerFromLocalStorage()
 
 var functions_1 = require("./functions");
 
-functions_1.m();
+functions_1.moveBall();
