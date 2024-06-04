@@ -3,5 +3,5 @@
 // import { m, moveBall } from './functions';
 exports.__esModule = true;
 // getPlayerFromLocalStorage()
-var functions_1 = require("./functions");
-functions_1.moveBall();
+var functions_js_1 = require("./functions.js");
+functions_js_1.moveBall();
