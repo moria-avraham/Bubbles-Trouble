@@ -7,3 +7,4 @@ import { moveBall } from './functions.js';
 
 
 moveBall();
+console.log("l")
