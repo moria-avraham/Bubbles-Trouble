@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es6",                          // גרסת JavaScript ליעד
+    "module": "es6",                          // מערכת המודולים
+    "outDir": "./ts/dist",                    // תיקייה לפלט
+    "rootDir": "./ts",                        // תיקיית המקור
+    "strict": true,                           // מצב קפדני
+    "esModuleInterop": true,                  // תאימות עם מודולים של ES
+    "forceConsistentCasingInFileNames": true  // שמות קבצים עקביים
+  },
+  "include": ["./ts/**/*.ts"],                // קבצים לכלול בפרויקט
+  "exclude": ["node_modules"]                 // קבצים ותיקיות לא לכלול בפרויקט
+}
