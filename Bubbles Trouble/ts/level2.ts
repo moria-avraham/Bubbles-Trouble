@@ -4,6 +4,7 @@ const life = document.querySelector('#container__life') as HTMLElement;
 const images = life.querySelectorAll('.Photos');
 const shoot = document.querySelector(`#container__shoot`) as HTMLElement;
 const player = document.querySelector('#container__player') as HTMLElement;
+const ball2 = document.querySelector('#container__ball2') as HTMLElement;
 let ballX = 600;
 let ballY = 0;
 let ballSpeedX = 5;
@@ -12,7 +13,6 @@ let canMoveBall = true;
 let ballExist = true;
 let endTheGame = false;
 
-const ball2 = document.querySelector('#container__ball2') as HTMLElement;
 moveBall()
 function moveBall() {
     try {

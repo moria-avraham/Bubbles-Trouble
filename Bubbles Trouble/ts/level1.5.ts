@@ -370,10 +370,6 @@ function shootBalls() {
             ball1Exist = false;
         }
 
-        if (ball2AndShootCollision()) {
-            level2 = true;
-        }
-
         if (ballHidden && !ball1Exist && !endTheGame) {
             const pointsStorage = localStorage.getItem('points');
             let points = pointsStorage ? JSON.parse(pointsStorage) : [];
@@ -383,10 +379,15 @@ function shootBalls() {
                     localStorage.setItem('points', JSON.stringify(points));
                     winningTheGame()
                 }
-                if ((points[0].currentLevel === 'level2') && level2) {
-                    points[0].level = 'level3'
-                    localStorage.setItem('points', JSON.stringify(points));
-                    winningTheGame()
+                if (points[0].currentLevel === 'level2') {
+                    // if (ball2AndShootCollision()) {
+                    //     points[0].level = 'level3'
+                    //     localStorage.setItem('points', JSON.stringify(points));
+                    //     winningTheGame()
+                    // }
+                }
+                if (points[0].currentLevel === 'level3') {
+                    console.log("first")
                 }
             }
 
