@@ -16,7 +16,7 @@ body {
             height: 50px;
             border-radius: 50%;
             position: absolute;
-            background: red;
+            background: black;
             display: none;
             z-index: 2;
             border: 1px black solid;
@@ -80,11 +80,19 @@ body {
             position: absolute;
             width: 100px;
             height: 100px;
-            background: red;
+            background: black;
             border-radius: 50%;
             border: 1px black solid;
         }
 
+        &__ball2 {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+            border: 1px black solid;
+        }
 
 
         &__shoot {
@@ -127,8 +135,6 @@ body {
             font-size: 20px;
             margin: 10px;
             background: url(//brachot.net/images/category_images/school-28949_1280.png) no-repeat center center/ cover;
-            // background-color: rgb(162, 165, 49);
-            // border: 2px solid yellow;
             color: yellow;
             -webkit-text-stroke-width: 1px;
             -webkit-text-stroke-color: black;

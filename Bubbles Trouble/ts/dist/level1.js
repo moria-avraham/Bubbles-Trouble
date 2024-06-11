@@ -1,87 +1,83 @@
+import { getPlayerFromLocalStorage, moveBall, GameEnd } from './functions.js';
 const smallBall1 = document.querySelector('#container__smallBall1');
 const gameOver = document.querySelector('#container__gameOver');
-getPlayerFromLocalStorage();
-function getPlayerFromLocalStorage() {
-    try {
-        const playersStorage = localStorage.getItem('players');
-        if (!playersStorage)
-            return [];
-        const playersArray = JSON.parse(playersStorage);
-        renderPlayers(playersArray[0]);
-    }
-    catch (error) {
-        console.error(error);
-        return [];
-    }
-}
-function renderPlayers(selectedPlayer) {
-    try {
-        const rootPlayer = document.querySelector('#container__player');
-        const html = `<img class="selectedPlayer bart" src="${selectedPlayer.playerImg}"> `;
-        rootPlayer.innerHTML = html;
-        const life = document.querySelector('#container__life');
-        const img = `<img id="image1" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image2" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image3" class="Photos" src="${selectedPlayer.playerImg}">`;
-        life.innerHTML = img;
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
 const player = document.querySelector(`.selectedPlayer`);
 const shoot = document.querySelector(`#container__shoot`);
 const container = document.querySelector('#container');
-document.addEventListener('keydown', (event) => {
-    event.stopPropagation();
-    const playerRect = player.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-    switch (event.key) {
-        case 'ArrowLeft':
-            if (playerRect.left > containerRect.left) {
-                player.style.left = `${player.offsetLeft - 25}px`;
-            }
-            break;
-        case 'ArrowRight':
-            if (playerRect.right < containerRect.right) {
-                player.style.left = `${player.offsetLeft + 25}px`;
-            }
-            break;
-    }
-});
-document.addEventListener('keydown', handleKeyDown);
-document.addEventListener('keyup', handleKeyUp);
-function handleKeyDown(event) {
-    try {
-        if (event.key === ' ') {
-            shoot.classList.add('show');
-        }
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
-function handleKeyUp(event) {
-    try {
-        if (event.key === ' ') {
-            shoot.classList.remove('show');
-        }
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
-function updateTargetPosition() {
-    try {
-        const sourceRect = player.getBoundingClientRect();
-        const targetRect = shoot.getBoundingClientRect();
-        const offsetX = sourceRect.left - targetRect.left;
-        const offsetY = sourceRect.top - targetRect.top;
-        shoot.style.left = parseFloat(getComputedStyle(shoot).left) + offsetX + 'px';
-        shoot.style.top = parseFloat(getComputedStyle(shoot).top) + offsetY + 'px';
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
+getPlayerFromLocalStorage();
+// function getPlayerFromLocalStorage() {
+//     try {
+//         const playersStorage = localStorage.getItem('players');
+//         if (!playersStorage) return [];
+//         const playersArray = JSON.parse(playersStorage);
+//         renderPlayers(playersArray[0])
+//     } catch (error) {
+//         console.error(error);
+//         return [];
+//     }
+// }
+// function renderPlayers(selectedPlayer: any) {
+//     try {
+//         const rootPlayer = document.querySelector('#container__player') as HTMLElement;
+//         const html = `<img class="selectedPlayer bart" src="${selectedPlayer.playerImg}"> `;
+//         rootPlayer.innerHTML = html;
+//         const life = document.querySelector('#container__life') as HTMLElement;
+//         const img = `<img id="image1" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image2" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image3" class="Photos" src="${selectedPlayer.playerImg}">`
+//         life.innerHTML = img;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+// const player = document.querySelector(`.selectedPlayer`) as HTMLElement;
+// document.addEventListener('keydown', (event: KeyboardEvent) => {
+//     event.stopPropagation();
+//     const playerRect = player.getBoundingClientRect();
+//     const containerRect = container.getBoundingClientRect();
+//     switch (event.key) {
+//         case 'ArrowLeft':
+//             if (playerRect.left > containerRect.left) {
+//                 player.style.left = `${player.offsetLeft - 25}px`;
+//             }
+//             break;
+//         case 'ArrowRight':
+//             if (playerRect.right < containerRect.right) {
+//                 player.style.left = `${player.offsetLeft + 25}px`;
+//             }
+//             break;
+//     }
+// });
+// document.addEventListener('keydown', handleKeyDown);
+// document.addEventListener('keyup', handleKeyUp);
+// function handleKeyDown(event: KeyboardEvent) {
+//     try {
+//         if (event.key === ' ') {
+//             shoot.classList.add('show');
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+// function handleKeyUp(event: KeyboardEvent) {
+//     try {
+//         if (event.key === ' ') {
+//             shoot.classList.remove('show');
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+// function updateTargetPosition() {
+//     try {
+//         const sourceRect = player.getBoundingClientRect();
+//         const targetRect = shoot.getBoundingClientRect();
+//         const offsetX = sourceRect.left - targetRect.left;
+//         const offsetY = sourceRect.top - targetRect.top;
+//         shoot.style.left = parseFloat(getComputedStyle(shoot).left) + offsetX + 'px';
+//         shoot.style.top = parseFloat(getComputedStyle(shoot).top) + offsetY + 'px';
+//     } catch (error) {
+//         console.error(error)
+//     }
+// }
 setInterval(updateTargetPosition, 100);
 const ball = document.querySelector('#container__ball');
 const life = document.querySelector('#container__life');
@@ -93,29 +89,28 @@ let ballY = 0;
 let ballSpeedX = 5;
 let ballSpeedY = 5;
 let canMoveBall = true;
-export function moveBall() {
-    try {
-        if (canMoveBall) {
-            const containerRect = container.getBoundingClientRect();
-            const ballRect = ball.getBoundingClientRect();
-            ballX += ballSpeedX;
-            ballY += ballSpeedY;
-            // Check for collision with container walls
-            if (ballX + ballRect.width > containerRect.width || ballX < 0) {
-                ballSpeedX *= -1;
-            }
-            if (ballY + ballRect.height > containerRect.height || ballY < 0) {
-                ballSpeedY *= -1;
-            }
-            ball.style.left = ballX + 'px';
-            ball.style.top = ballY + 'px';
-            requestAnimationFrame(moveBall);
-        }
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
+// export function moveBall() {
+//     try {
+//         if (canMoveBall) {
+//             const containerRect = container.getBoundingClientRect();
+//             const ballRect = ball.getBoundingClientRect();
+//             ballX += ballSpeedX;
+//             ballY += ballSpeedY;
+//             // Check for collision with container walls
+//             if (ballX + ballRect.width > containerRect.width || ballX < 0) {
+//                 ballSpeedX *= -1;
+//             }
+//             if (ballY + ballRect.height > containerRect.height || ballY < 0) {
+//                 ballSpeedY *= -1;
+//             }
+//             ball.style.left = ballX + 'px';
+//             ball.style.top = ballY + 'px';
+//             requestAnimationFrame(moveBall);
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 moveBall();
 function checkPlayerBallCollision() {
     try {
@@ -153,18 +148,17 @@ function checkPlayerSmallBallCollision() {
         console.error(error);
     }
 }
-function GameEnd() {
-    try {
-        life.classList.add("none");
-        player.classList.add("none");
-        shoot.classList.add("none");
-        ball.classList.add("none");
-        smallBall1.classList.add("none");
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
+// function GameEnd() {
+//     try {
+//         life.classList.add("none")
+//         player.classList.add("none")
+//         shoot.classList.add("none")
+//         ball.classList.add("none")
+//         smallBall1.classList.add("none")
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 function changeBallPosition() {
     try {
         const containerRect = container.getBoundingClientRect();

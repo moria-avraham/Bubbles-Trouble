@@ -1,6 +1,5 @@
 
-
-
+import { ball2AndShootCollision } from './level2.js';
 
 const smallBall1 = document.querySelector('#container__smallBall1') as HTMLElement;
 const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
@@ -106,7 +105,7 @@ let ballSpeedY = 5;
 let canMoveBall = true;
 
 
-export function moveBall() {
+function moveBall() {
     try {
         if (canMoveBall) {
 
@@ -176,7 +175,7 @@ function checkPlayerSmallBallCollision() {
     }
 }
 
-function GameEnd() {
+export function GameEnd() {
     try {
         life.classList.add("none")
         player.classList.add("none")
@@ -347,12 +346,22 @@ function checkShootSmallBallCollision() {
         console.error(error);
     }
 }
-
+function winningTheGame() {
+    try {
+        GameEnd()
+        const html = `<h1>Good Job</h1>  <a href="levels.html">next level</a>`
+        gameOver.innerHTML = html;
+        endTheGame = true;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 setInterval(shootBalls, 10);
 let ball1Exist = true;
-let ball2Exist = true;
 let endTheGame = false;
+let level2 = false;
+
 function shootBalls() {
     try {
         const iscollision3 = checkShootSmallBallCollision()
@@ -361,21 +370,29 @@ function shootBalls() {
             ball1Exist = false;
         }
 
+        if (ball2AndShootCollision()) {
+            level2 = true;
+        }
+
         if (ballHidden && !ball1Exist && !endTheGame) {
             const pointsStorage = localStorage.getItem('points');
             let points = pointsStorage ? JSON.parse(pointsStorage) : [];
             if (points.length > 0) {
-                points[0].level = 'level2';
+                if (points[0].currentLevel === 'level1') {
+                    points[0].level = 'level2'
+                    localStorage.setItem('points', JSON.stringify(points));
+                    winningTheGame()
+                }
+                if ((points[0].currentLevel === 'level2') && level2) {
+                    points[0].level = 'level3'
+                    localStorage.setItem('points', JSON.stringify(points));
+                    winningTheGame()
+                }
             }
-            localStorage.setItem('points', JSON.stringify(points));
-            GameEnd()
-            const html = `<h1>Good Job</h1>  <a href="levels.html">next level</a>`
-            gameOver.innerHTML = html;
-            endTheGame = true;
+
         }
     } catch (error) {
         console.error(error);
     }
 }
-
 

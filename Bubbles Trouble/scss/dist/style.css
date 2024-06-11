@@ -15,7 +15,7 @@ body #container__smallBall1 {
   height: 50px;
   border-radius: 50%;
   position: absolute;
-  background: red;
+  background: black;
   display: none;
   z-index: 2;
   border: 1px black solid;
@@ -66,6 +66,14 @@ body #container__ball {
   position: absolute;
   width: 100px;
   height: 100px;
+  background: black;
+  border-radius: 50%;
+  border: 1px black solid;
+}
+body #container__ball2 {
+  position: absolute;
+  width: 50px;
+  height: 50px;
   background: red;
   border-radius: 50%;
   border: 1px black solid;
@@ -99,6 +107,7 @@ body #container .level {
   font-size: 20px;
   margin: 10px;
   background: url(//brachot.net/images/category_images/school-28949_1280.png) no-repeat center center/cover;
+  border: 2px solid black;
   color: yellow;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
