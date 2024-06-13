@@ -14,6 +14,7 @@ if (points.length > 0) {
         level2 = true;
     }
 }
+
 let ballX = 600;
 let ballY = 0;
 let ballSpeedX = 5;
@@ -57,6 +58,8 @@ function checkPlayerBallCollision() {
         if (level2) {
             const playerLocation = player.getBoundingClientRect();
             const ballLocation = ball2.getBoundingClientRect();
+            console.log("Player location:", playerLocation);
+            // console.log("Ball2 location:", ballLocation);
 
             if (
                 playerLocation.right > ballLocation.left &&
