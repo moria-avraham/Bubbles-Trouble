@@ -6,7 +6,7 @@ const smallBall1 = document.querySelector('#container__smallBall1') as HTMLEleme
 const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
 
 getPlayerFromLocalStorage()
-function getPlayerFromLocalStorage() {
+export function getPlayerFromLocalStorage() {
     try {
         const playersStorage = localStorage.getItem('players');
         if (!playersStorage) return [];
@@ -26,6 +26,7 @@ function renderPlayers(selectedPlayer: any) {
         const life = document.querySelector('#container__life') as HTMLElement;
         const img = `<img id="image1" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image2" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image3" class="Photos" src="${selectedPlayer.playerImg}">`
         life.innerHTML = img;
+
     } catch (error) {
         console.error(error);
     }

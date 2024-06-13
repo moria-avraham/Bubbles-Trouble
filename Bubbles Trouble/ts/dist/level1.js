@@ -3,7 +3,7 @@ import { endLevel3 } from './level3.js';
 const smallBall1 = document.querySelector('#container__smallBall1');
 const gameOver = document.querySelector('#container__gameOver');
 getPlayerFromLocalStorage();
-function getPlayerFromLocalStorage() {
+export function getPlayerFromLocalStorage() {
     try {
         const playersStorage = localStorage.getItem('players');
         if (!playersStorage)

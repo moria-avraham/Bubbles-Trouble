@@ -11,7 +11,8 @@ body {
         border: 2px gray solid;
         background: url(//sugarcakes4u.co.il/wp-content/uploads/2018/03/%D7%A4%D7%A8%D7%A7%D7%98-%D7%9C%D7%91%D7%9F-1.jpg) no-repeat center center/ cover;
 
-        &__smallBall1 {
+        &__smallBall1,
+        &__smallBall3 {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -94,7 +95,7 @@ body {
             position: absolute;
             width: 50px;
             height: 50px;
-            background: red;
+            background: black;
             border-radius: 50%;
             border: 1px black solid;
         }

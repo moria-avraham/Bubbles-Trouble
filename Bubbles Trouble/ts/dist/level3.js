@@ -15,7 +15,7 @@ if (points.length > 0) {
         level3 = true;
     }
 }
-let ballX = 600;
+let ballX = 200;
 let ballY = 0;
 let ballSpeedX = 5;
 let ballSpeedY = 5;
@@ -49,7 +49,8 @@ moveBall();
 function checkPlayerBallCollision() {
     try {
         if (level3) {
-            const playerLocation = player.getBoundingClientRect();
+            const playerImage = document.querySelector('.selectedPlayer');
+            const playerLocation = playerImage.getBoundingClientRect();
             const ballLocation = ball3.getBoundingClientRect();
             if (playerLocation.right > ballLocation.left &&
                 playerLocation.left < ballLocation.right &&
@@ -79,6 +80,25 @@ function changeBallPosition() {
         console.error(error);
     }
 }
+function checkPlayerSmallBallCollision() {
+    try {
+        const playerImage = document.querySelector('.selectedPlayer');
+        const playerLocation = playerImage.getBoundingClientRect();
+        const ballLocation = smallBall3.getBoundingClientRect();
+        if (playerLocation.right > ballLocation.left &&
+            playerLocation.left < ballLocation.right &&
+            playerLocation.bottom > ballLocation.top &&
+            playerLocation.top < ballLocation.bottom) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
 let collisionCount = 0;
 let gameEnded = false;
 function ballAndPlayerCollision() {
@@ -89,7 +109,8 @@ function ballAndPlayerCollision() {
                 return;
             }
             const iscollision = checkPlayerBallCollision();
-            if (iscollision) {
+            const PlayerSmallBallCollision = checkPlayerSmallBallCollision();
+            if (iscollision || PlayerSmallBallCollision) {
                 const imageToRemove = images[collisionCount];
                 if (imageToRemove) {
                     if (imageToRemove.parentNode === life) {
@@ -106,6 +127,7 @@ function ballAndPlayerCollision() {
                         changeBallPosition();
                         canMoveBall = true;
                         moveBall();
+                        updateBallsPosition();
                     }, 1000);
                 }
                 else if (collisionCount === 3) {

@@ -3,7 +3,6 @@ const gameOver = document.querySelector('#container__gameOver');
 const life = document.querySelector('#container__life');
 const images = life.querySelectorAll('.Photos');
 const shoot = document.querySelector(`#container__shoot`);
-const player = document.querySelector('#container__player');
 const ball2 = document.querySelector('#container__ball2');
 const container = document.querySelector('#container');
 let level2 = false;
@@ -49,19 +48,16 @@ function moveBall() {
 function checkPlayerBallCollision() {
     try {
         if (level2) {
-            const playerLocation = player.getBoundingClientRect();
+            const playerImage = document.querySelector('.bart');
+            const playerLocation = playerImage.getBoundingClientRect();
             const ballLocation = ball2.getBoundingClientRect();
-            console.log("Player location:", playerLocation);
-            // console.log("Ball2 location:", ballLocation);
             if (playerLocation.right > ballLocation.left &&
                 playerLocation.left < ballLocation.right &&
                 playerLocation.bottom > ballLocation.top &&
                 playerLocation.top < ballLocation.bottom) {
-                console.log("first");
                 return true;
             }
             else {
-                console.log("pp");
                 return false;
             }
         }
