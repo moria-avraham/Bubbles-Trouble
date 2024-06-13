@@ -21,8 +21,6 @@ function logIn() {
 
         const html = ` <div class="log"> <form onsubmit="handleName(event)"><label for="worker-name">enter your Name:</label> <br>
         <input required type="text" name="name" value=""> <br> <br> <button type="submit">ok</button> </form> </div>`;
-        if (!root) throw new Error("no root element");
-
         root.innerHTML = html;
     } catch (error) {
         console.error(error);

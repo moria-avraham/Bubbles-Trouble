@@ -1,10 +1,19 @@
-import { GameEnd } from './level1.5.js';
+import { GameEnd } from './level1.js';
 const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
 const life = document.querySelector('#container__life') as HTMLElement;
 const images = life.querySelectorAll('.Photos');
 const shoot = document.querySelector(`#container__shoot`) as HTMLElement;
 const player = document.querySelector('#container__player') as HTMLElement;
 const ball2 = document.querySelector('#container__ball2') as HTMLElement;
+const container = document.querySelector('#container') as HTMLElement;
+let level2 = false;
+const pointsStorage = localStorage.getItem('points');
+let points = pointsStorage ? JSON.parse(pointsStorage) : [];
+if (points.length > 0) {
+    if (points[0].currentLevel === 'level2') {
+        level2 = true;
+    }
+}
 let ballX = 600;
 let ballY = 0;
 let ballSpeedX = 5;
@@ -16,26 +25,28 @@ let endTheGame = false;
 moveBall()
 function moveBall() {
     try {
-        if (canMoveBall) {
+        if (level2) {
+            if (canMoveBall) {
 
-            const containerRect = container.getBoundingClientRect();
-            const ballRect = ball2.getBoundingClientRect();
-
-
-            ballX += ballSpeedX;
-            ballY += ballSpeedY;
+                const containerRect = container.getBoundingClientRect();
+                const ballRect = ball2.getBoundingClientRect();
 
 
-            if (ballX + ballRect.width > containerRect.width || ballX < 0) {
-                ballSpeedX *= -1;
+                ballX += ballSpeedX;
+                ballY += ballSpeedY;
+
+
+                if (ballX + ballRect.width > containerRect.width || ballX < 0) {
+                    ballSpeedX *= -1;
+                }
+                if (ballY + ballRect.height > containerRect.height || ballY < 0) {
+                    ballSpeedY *= -1;
+                }
+
+                ball2.style.left = ballX + 'px';
+                ball2.style.top = ballY + 'px';
+                requestAnimationFrame(moveBall);
             }
-            if (ballY + ballRect.height > containerRect.height || ballY < 0) {
-                ballSpeedY *= -1;
-            }
-
-            ball2.style.left = ballX + 'px';
-            ball2.style.top = ballY + 'px';
-            requestAnimationFrame(moveBall);
         }
     } catch (error) {
         console.error(error);
@@ -43,20 +54,22 @@ function moveBall() {
 }
 function checkPlayerBallCollision() {
     try {
-        const playerLocation = player.getBoundingClientRect();
-        const ballLocation = ball2.getBoundingClientRect();
+        if (level2) {
+            const playerLocation = player.getBoundingClientRect();
+            const ballLocation = ball2.getBoundingClientRect();
 
-        if (
-            playerLocation.right > ballLocation.left &&
-            playerLocation.left < ballLocation.right &&
-            playerLocation.bottom > ballLocation.top &&
-            playerLocation.top < ballLocation.bottom
-        ) {
-            console.log("first")
-            return true;
-        } else {
-            console.log("pp")
-            return false;
+            if (
+                playerLocation.right > ballLocation.left &&
+                playerLocation.left < ballLocation.right &&
+                playerLocation.bottom > ballLocation.top &&
+                playerLocation.top < ballLocation.bottom
+            ) {
+                console.log("first")
+                return true;
+            } else {
+                console.log("pp")
+                return false;
+            }
         }
     } catch (error) {
         console.error(error);
@@ -120,18 +133,20 @@ setInterval(() => {
 }, 10);
 export function checkShootBall2Collision() {
     try {
-        const ropeLocation = shoot.getBoundingClientRect();
-        const ballLocation = ball2.getBoundingClientRect();
+        if (level2) {
+            const ropeLocation = shoot.getBoundingClientRect();
+            const ballLocation = ball2.getBoundingClientRect();
 
-        if (
-            ropeLocation.right > ballLocation.left &&
-            ropeLocation.left < ballLocation.right &&
-            ropeLocation.bottom > ballLocation.top &&
-            ropeLocation.top < ballLocation.bottom
-        ) {
-            return true;
-        } else {
-            return false;
+            if (
+                ropeLocation.right > ballLocation.left &&
+                ropeLocation.left < ballLocation.right &&
+                ropeLocation.bottom > ballLocation.top &&
+                ropeLocation.top < ballLocation.bottom
+            ) {
+                return true;
+            } else {
+                return false;
+            }
         }
     } catch (error) {
         console.error(error);

@@ -76,13 +76,18 @@ body {
         }
 
 
-        &__ball {
+        &__ball,
+        &__ball3 {
             position: absolute;
             width: 100px;
             height: 100px;
             background: red;
             border-radius: 50%;
             border: 1px black solid;
+        }
+
+        &__ball3 {
+            background-color: blue;
         }
 
         &__ball2 {
@@ -138,6 +143,7 @@ body {
             color: yellow;
             -webkit-text-stroke-width: 1px;
             -webkit-text-stroke-color: black;
+            border: solid black 2px;
         }
 
         .notAvailable {

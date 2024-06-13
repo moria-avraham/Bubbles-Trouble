@@ -1,5 +1,6 @@
 
 import { ball2AndShootCollision } from './level2.js';
+import { endLevel3 } from './level3.js';
 
 const smallBall1 = document.querySelector('#container__smallBall1') as HTMLElement;
 const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
@@ -361,6 +362,7 @@ setInterval(shootBalls, 10);
 let ball1Exist = true;
 let endTheGame = false;
 let level2 = false;
+let level3 = false;
 
 function shootBalls() {
     try {
@@ -369,25 +371,34 @@ function shootBalls() {
             smallBall1.style.display = 'none';
             ball1Exist = false;
         }
-
+        if (ball2AndShootCollision()) {
+            level2 = true;
+        }
+        if (endLevel3()) {
+            level3 = true;
+        }
         if (ballHidden && !ball1Exist && !endTheGame) {
             const pointsStorage = localStorage.getItem('points');
             let points = pointsStorage ? JSON.parse(pointsStorage) : [];
             if (points.length > 0) {
                 if (points[0].currentLevel === 'level1') {
-                    points[0].level = 'level2'
-                    localStorage.setItem('points', JSON.stringify(points));
+                    if (points[0].level === 'level1') {
+                        points[0].level = 'level2'
+                        localStorage.setItem('points', JSON.stringify(points));
+                    }
                     winningTheGame()
                 }
                 if (points[0].currentLevel === 'level2') {
-                    // if (ball2AndShootCollision()) {
-                    //     points[0].level = 'level3'
-                    //     localStorage.setItem('points', JSON.stringify(points));
-                    //     winningTheGame()
-                    // }
+                    if (level2) {
+                        points[0].level = 'level3'
+                        localStorage.setItem('points', JSON.stringify(points));
+                        winningTheGame()
+                    }
                 }
                 if (points[0].currentLevel === 'level3') {
-                    console.log("first")
+                    if (level3) {
+                        winningTheGame()
+                    }
                 }
             }
 

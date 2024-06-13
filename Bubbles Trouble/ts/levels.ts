@@ -3,6 +3,20 @@ const level3 = document.querySelector('.level3') as HTMLElement;
 const pointsStorage = localStorage.getItem('points');
 let thePoints = pointsStorage ? JSON.parse(pointsStorage) : [];
 
+function startPlaying() {
+    try {
+        let points = JSON.parse(localStorage.getItem('points') || '[]');
+        if (points.length > 0) {
+            points[0].currentLevel = 'level1';
+            localStorage.setItem('points', JSON.stringify(points));
+        }
+        window.location.href = 'gameItself.html';
+    } catch (error) {
+        console.error("Error updating points for level 1:", error);
+    }
+}
+
+
 function level2ToButton() {
     level2.classList.remove("notAvailable");
     level2.addEventListener('click', function () {

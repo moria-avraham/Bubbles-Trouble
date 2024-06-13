@@ -16,15 +16,16 @@ class Point {
 }
 const root = document.querySelector(`#root`);
 const rootPlayer = document.querySelector(`#rootPlayer`);
+let noRoot = true;
 const points = [];
 logIn();
 function logIn() {
     try {
-        const html = ` <div class="log"> <form onsubmit="handleName(event)"><label for="worker-name">enter your Name:</label> <br>
-        <input required type="text" name="name" value=""> <br> <br> <button type="submit">ok</button> </form> </div>`;
-        if (!root)
-            throw new Error("no root element");
-        root.innerHTML = html;
+        if (noRoot) {
+            const html = ` <div class="log"> <form onsubmit="handleName(event)"><label for="worker-name">enter your Name:</label> <br>
+            <input required type="text" name="name" value=""> <br> <br> <button type="submit">ok</button> </form> </div>`;
+            root.innerHTML = html;
+        }
     }
     catch (error) {
         console.error(error);
@@ -53,6 +54,7 @@ function addHomer() {
         const selectedPlayer = new Player("../img/homer.png");
         players.push(selectedPlayer);
         savePlayerInLocalStorage(players);
+        noRoot = false;
         window.location.href = "view/levels.html";
     }
     catch (error) {
@@ -64,6 +66,7 @@ function addBart() {
         const selectedPlayer = new Player("../img/bart.png");
         players.push(selectedPlayer);
         savePlayerInLocalStorage(players);
+        noRoot = false;
         window.location.href = "view/levels.html";
     }
     catch (error) {
@@ -75,6 +78,7 @@ function addMaggie() {
         const selectedPlayer = new Player("../img/Maggie.png");
         players.push(selectedPlayer);
         savePlayerInLocalStorage(players);
+        noRoot = false;
         window.location.href = "view/levels.html";
     }
     catch (error) {

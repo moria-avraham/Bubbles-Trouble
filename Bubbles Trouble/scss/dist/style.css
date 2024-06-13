@@ -62,13 +62,16 @@ body #container__life #image2 {
 body #container__life #image3 {
   left: 65px;
 }
-body #container__ball {
+body #container__ball, body #container__ball3 {
   position: absolute;
   width: 100px;
   height: 100px;
   background: red;
   border-radius: 50%;
   border: 1px black solid;
+}
+body #container__ball3 {
+  background-color: blue;
 }
 body #container__ball2 {
   position: absolute;
@@ -110,6 +113,7 @@ body #container .level {
   color: yellow;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
+  border: solid black 2px;
 }
 body #container .notAvailable {
   background-color: gray;
