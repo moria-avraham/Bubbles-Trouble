@@ -1,8 +1,6 @@
 import { GameEnd } from './level1.js';
 const ball3 = document.querySelector('#container__ball3') as HTMLElement;
 const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
-const life = document.querySelector('#container__life') as HTMLElement;
-const images = life.querySelectorAll('.Photos');
 const shoot = document.querySelector(`#container__shoot`) as HTMLElement;
 const player = document.querySelector('#container__player') as HTMLElement;
 const smallBall3 = document.querySelector('#container__smallBall3') as HTMLElement;
@@ -55,7 +53,7 @@ function moveBall() {
 moveBall();
 
 
-function checkPlayerBallCollision() {
+function checkPlayerBall3Collision() {
     try {
         if (level3) {
             const playerImage = document.querySelector('.selectedPlayer') as HTMLElement;
@@ -123,7 +121,9 @@ function ballAndPlayerCollision() {
                 gameEnded = true;
                 return;
             }
-            const iscollision = checkPlayerBallCollision()
+            const life = document.querySelector('#container__life') as HTMLElement;
+            const images = life.querySelectorAll('.Photos');
+            const iscollision = checkPlayerBall3Collision()
             const PlayerSmallBallCollision = checkPlayerSmallBallCollision()
             if (iscollision || PlayerSmallBallCollision) {
                 const imageToRemove = images[collisionCount];

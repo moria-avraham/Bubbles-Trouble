@@ -4,6 +4,7 @@ import { endLevel3 } from './level3.js';
 
 const smallBall1 = document.querySelector('#container__smallBall1') as HTMLElement;
 const gameOver = document.querySelector('#container__gameOver') as HTMLElement;
+const life = document.querySelector('#container__life') as HTMLElement;
 
 getPlayerFromLocalStorage()
 export function getPlayerFromLocalStorage() {
@@ -23,7 +24,6 @@ function renderPlayers(selectedPlayer: any) {
         const rootPlayer = document.querySelector('#container__player') as HTMLElement;
         const html = `<img class="selectedPlayer bart" src="${selectedPlayer.playerImg}"> `;
         rootPlayer.innerHTML = html;
-        const life = document.querySelector('#container__life') as HTMLElement;
         const img = `<img id="image1" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image2" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image3" class="Photos" src="${selectedPlayer.playerImg}">`
         life.innerHTML = img;
 
@@ -95,8 +95,6 @@ function updateTargetPosition() {
 setInterval(updateTargetPosition, 100);
 
 const ball = document.querySelector('#container__ball') as HTMLElement;
-const life = document.querySelector('#container__life') as HTMLElement;
-const images = life.querySelectorAll('.Photos');
 let collisionCount = 0;
 let gameEnded = false;
 
@@ -118,7 +116,6 @@ function moveBall() {
             ballX += ballSpeedX;
             ballY += ballSpeedY;
 
-            // Check for collision with container walls
             if (ballX + ballRect.width > containerRect.width || ballX < 0) {
                 ballSpeedX *= -1;
             }
@@ -211,7 +208,8 @@ function ballAndPlayerCollision() {
             gameEnded = true;
             return;
         }
-
+        const life = document.querySelector('#container__life') as HTMLElement;
+        const images = life.querySelectorAll('.Photos');
         const iscollision = checkPlayerBallCollision()
         const collisionsmallBal = checkPlayerSmallBallCollision();
         if (iscollision || collisionsmallBal) {

@@ -1,7 +1,6 @@
 import { GameEnd } from './level1.js';
 const gameOver = document.querySelector('#container__gameOver');
 const life = document.querySelector('#container__life');
-const images = life.querySelectorAll('.Photos');
 const shoot = document.querySelector(`#container__shoot`);
 const ball2 = document.querySelector('#container__ball2');
 const container = document.querySelector('#container');
@@ -45,7 +44,7 @@ function moveBall() {
         console.error(error);
     }
 }
-function checkPlayerBallCollision() {
+export function checkPlayerBall2Collision() {
     try {
         if (level2) {
             const playerImage = document.querySelector('.bart');
@@ -68,7 +67,7 @@ function checkPlayerBallCollision() {
 }
 let collisionCount = 0;
 let gameEnded = false;
-function changeBallPosition() {
+function changeBall2Position() {
     try {
         const containerRect = container.getBoundingClientRect();
         const ballRect = ball2.getBoundingClientRect();
@@ -83,11 +82,13 @@ function changeBallPosition() {
 }
 function ballAndPlayerCollision() {
     try {
+        const life = document.querySelector('#container__life');
+        const images = life.querySelectorAll('.Photos');
         if (collisionCount >= 3) {
             gameEnded = true;
             return;
         }
-        const iscollision = checkPlayerBallCollision();
+        const iscollision = checkPlayerBall2Collision();
         if (iscollision) {
             const imageToRemove = images[collisionCount];
             if (imageToRemove) {
@@ -97,7 +98,7 @@ function ballAndPlayerCollision() {
             if (collisionCount === 1 || collisionCount === 2) {
                 canMoveBall = false;
                 setTimeout(() => {
-                    changeBallPosition();
+                    changeBall2Position();
                     canMoveBall = true;
                     moveBall();
                 }, 1000);

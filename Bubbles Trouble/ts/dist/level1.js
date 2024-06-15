@@ -2,6 +2,7 @@ import { ball2AndShootCollision } from './level2.js';
 import { endLevel3 } from './level3.js';
 const smallBall1 = document.querySelector('#container__smallBall1');
 const gameOver = document.querySelector('#container__gameOver');
+const life = document.querySelector('#container__life');
 getPlayerFromLocalStorage();
 export function getPlayerFromLocalStorage() {
     try {
@@ -21,7 +22,6 @@ function renderPlayers(selectedPlayer) {
         const rootPlayer = document.querySelector('#container__player');
         const html = `<img class="selectedPlayer bart" src="${selectedPlayer.playerImg}"> `;
         rootPlayer.innerHTML = html;
-        const life = document.querySelector('#container__life');
         const img = `<img id="image1" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image2" class="Photos" src="${selectedPlayer.playerImg}"> <img id="image3" class="Photos" src="${selectedPlayer.playerImg}">`;
         life.innerHTML = img;
     }
@@ -86,8 +86,6 @@ function updateTargetPosition() {
 }
 setInterval(updateTargetPosition, 100);
 const ball = document.querySelector('#container__ball');
-const life = document.querySelector('#container__life');
-const images = life.querySelectorAll('.Photos');
 let collisionCount = 0;
 let gameEnded = false;
 let ballX = 0;
@@ -186,6 +184,8 @@ function ballAndPlayerCollision() {
             gameEnded = true;
             return;
         }
+        const life = document.querySelector('#container__life');
+        const images = life.querySelectorAll('.Photos');
         const iscollision = checkPlayerBallCollision();
         const collisionsmallBal = checkPlayerSmallBallCollision();
         if (iscollision || collisionsmallBal) {
