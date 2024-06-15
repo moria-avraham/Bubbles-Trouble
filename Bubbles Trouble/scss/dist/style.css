@@ -70,9 +70,6 @@ body #container__ball, body #container__ball3 {
   border-radius: 50%;
   border: 1px black solid;
 }
-body #container__ball3 {
-  background-color: blue;
-}
 body #container__ball2 {
   position: absolute;
   width: 50px;
