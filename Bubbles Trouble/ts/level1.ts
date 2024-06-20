@@ -349,7 +349,7 @@ function checkShootSmallBallCollision() {
 function winningTheGame() {
     try {
         GameEnd()
-        const html = `<h1>Good Job</h1>  <a href="levels.html">next level</a>`
+        const html = `<h1>Good Job</h1> <p>Good Job, you win</p> `
         gameOver.innerHTML = html;
         endTheGame = true;
     } catch (error) {
